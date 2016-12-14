@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="60dp"
+    android:minHeight="40dp"
+    android:updatePeriodMillis="2147483647"
+    android:initialLayout="@layout/simple_widget"
+    android:resizeMode="horizontal|vertical"
+    android:widgetCategory="home_screen|keyguard"
+                    android:configure="com.jungle.sparknote.ListNotesActivity"
+
+    android:previewImage="@drawable/icon">
+</appwidget-provider>
