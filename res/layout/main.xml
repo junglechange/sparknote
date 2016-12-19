@@ -2,17 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+        android:background="@drawable/main">
     <Button
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:text="edit note"
             android:id="@+id/button_edit_note" android:layout_gravity="center_horizontal" />
+    <WebView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/webview">
 
+    </WebView>
+    <ImageView
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/mainimg"
+            android:background="@android:color/transparent"
+            />
 
-    <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="b2"
-            android:id="@+id/button2" android:layout_gravity="center_horizontal"
-            android:clickable="false"/>
 </LinearLayout>
 

@@ -2,8 +2,8 @@ package com.jungle.sparknote.com.jungle.sparknote.dao;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.provider.ContactsContract;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,74 +11,80 @@ import java.util.Map;
  */
 public class NoteDao {
     private static Context context = null;
-    private static Map<String,String> data = null;
     private static final String noteFileName = "note-data";
     private static final String widgetIdNoteIdMapFileName = "widget-note-data";
     private static NoteDao noteDao = null;
-    public void saveNoteData(Map<String,String> data){
+
+    public void saveNoteData(Map<String, String> data) {
         SharedPreferences.Editor editor = context.getSharedPreferences(noteFileName,
                 context.MODE_PRIVATE).edit();
-        for (Map.Entry<String,String> entry : data.entrySet()){
-            editor.putString(entry.getKey(),entry.getValue());
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            editor.putString(entry.getKey(), entry.getValue());
         }
         editor.commit();
     }
 
 
-    public Map<String,String> getNoteData(){
-
-                    SharedPreferences pref = context.getSharedPreferences(noteFileName,
-                            context.MODE_PRIVATE);
-        data = (Map<String,String>)pref.getAll();
-
-
+    public Map<String, String> getNoteData() {
+        SharedPreferences pref = context.getSharedPreferences(noteFileName,
+                context.MODE_PRIVATE);
+        Map<String, String> data = (Map<String, String>) pref.getAll();
         return data;
     }
 
-    public void saveOneNote(String noteId, String noteValue){
+    public void saveOneNote(String noteId, String noteValue) {
         SharedPreferences.Editor editor = context.getSharedPreferences(noteFileName,
                 context.MODE_PRIVATE).edit();
-        editor.putString(noteId,noteValue);
+        editor.putString(noteId, noteValue);
         editor.commit();
     }
 
-    public void removeOneNote(String id){
+    public void removeOneNote(String id) {
         SharedPreferences.Editor editor = context.getSharedPreferences(noteFileName,
                 context.MODE_PRIVATE).edit();
         editor.remove(id);
         editor.commit();
     }
 
-    public void saveWidgetNoteMap(String widgetId, String noteId){
-        SharedPreferences.Editor editor = context.getSharedPreferences(widgetIdNoteIdMapFileName,
+    public void removeNotes(List<String> ids) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(noteFileName,
                 context.MODE_PRIVATE).edit();
-        editor.putString(widgetId,noteId);
+        for (String id : ids) {
+            editor.remove(id);
+        }
         editor.commit();
     }
 
-    public void removeWidgetNoteMap(String widgetId){
+    public void saveWidgetNoteMap(String widgetId, String noteId) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(widgetIdNoteIdMapFileName,
+                context.MODE_PRIVATE).edit();
+        editor.putString(widgetId, noteId);
+        editor.commit();
+    }
+
+    public void removeWidgetNoteMap(String widgetId) {
         SharedPreferences.Editor editor = context.getSharedPreferences(widgetIdNoteIdMapFileName,
                 context.MODE_PRIVATE).edit();
         editor.remove(widgetId);
         editor.commit();
     }
 
-    public String getWidgetNoteId(String widgetId){
+    public String getWidgetNoteId(String widgetId) {
         String noteId = context.getSharedPreferences(widgetIdNoteIdMapFileName,
-                context.MODE_PRIVATE).getString(widgetId,"-1");
-        return  noteId;
+                context.MODE_PRIVATE).getString(widgetId, "-1");
+        return noteId;
     }
 
 
-    public static NoteDao getNoteDao(Context context){
-        if (context==null){
-            noteDao=null;
+    public static NoteDao getNoteDao(Context context) {
+        if (context == null) {
+            noteDao = null;
             return noteDao;
         }
         NoteDao.context = context;
-        if (noteDao == null){
-            synchronized (NoteDao.class){
-                if (noteDao==null){
+        if (noteDao == null) {
+            synchronized (NoteDao.class) {
+                if (noteDao == null) {
                     noteDao = new NoteDao();
                 }
             }

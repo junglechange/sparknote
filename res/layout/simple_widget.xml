@@ -13,7 +13,6 @@
             android:id="@+id/textView3"
             android:layout_gravity="center"
             android:gravity="center"
-
             android:layout_marginTop="0dp"
             android:textColor="@android:color/black"/>
 </LinearLayout>

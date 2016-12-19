@@ -7,5 +7,4 @@ import android.appwidget.AppWidgetProvider;
  */
 public class SparkWidget extends AppWidgetProvider {
     public static final String ClickWidgetAction = "ClickWidgetAction";
-
 }
